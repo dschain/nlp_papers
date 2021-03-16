@@ -1,0 +1,1 @@
+GCN方法又可以分为两大类，基于谱（spectral-based）和基于空间（spatial-based） 

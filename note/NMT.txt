@@ -1,0 +1,98 @@
+1.神经网络结构发展
+	2014 seq2seq     Gooogle
+	2015 Attention   Bahdanau et al
+	2017 ConvS2S     Facebook
+	2017 Transormer  Google
+	2018 BERT        2018
+	2020 GPT-3       OpenAI
+	Transormer主导了各类NLP任务
+2.模型结构整体趋势
+	Transformer			Google		 2017		-6层/12层
+	BERT     			Google 		 2018		-12层/24层
+	XLNET     			Google		 2019		-24层
+	Deep Transformer	NEU&NiuTrans 2019		-35层
+	GPT-3				OpenAI       2020		-96层，1700亿参数
+	结构越来越复杂，模型规模越来越大，效率越来越受关注
+3.优化趋势
+	3.1提升模型表示能力
+		a）局部依赖建模问题
+			引入卷积层，使用局部注意力机制
+				Convolutional Self-attention (Yang et al., NAACL 2019)
+				Conformer (Gulati et al., arXiv 2020)
+			多分支结构
+				Lite Transformer (Wu et al., ICLR 2020) 
+				Evolved Transformer (So et al., ICML 2019) 
+			
+		b）长序列建模问题
+			Transformer-XL (Yang et al., ACL 2019)
+			Compressive Transformer (Rae et al., ICLR 2020)
+			使用稀疏注意力机制
+				 Reformer, Kitaev et al., ICLR 2020		使用局部敏感注意力机制
+				 Big Bird   2020                        使用混合的注意力机制
+				 Synthesizer, Tay et al., arXiv 2020    使用随机的注意力机制
+				 Longformer, Beltagy et al., arXiv 2020 窗口和全局模式结合的注意力机制
+				 Performer                       2020   通过核函数近似注意力机制
+		c）位置、结构信息编码
+			自注意力机制难以捕获词序信息，针对其使用的绝对位置编码提出了改进
+				SPR, Wang et al., EMNLP 2019	树结构编码相对位置
+				FLOATER, Liu et al., ICML 2020  连续动态系统和ODE学习编码位置
+				Complex embeddings, Wang et al., ICLR 2020 将位置向量的连续函数扩展到复数域
+			添加额外的编码模块
+				Tree Transformer (Wang et al., EMNLP 2019)
+				Tree-structured Attention 2020
+			建模语法、句法等结构信息
+				Ordered Neurons 2029
+				Structural Transformer 2019
+		d）深层网络结构优化问题
+			Transparent Attention (Bapna et al., EMNLP 2018)
+			Depth Growing (Wu et al., ACL 2019)
+			深层网络建模中有两大关键性因素：局部网络结构调整与合适的训练方式。
+				局部性的网络结构调整的工作
+					Transformer-DLCL (Wang et al., ACL 2019) 
+					多尺度协调网络 (Wei et al., ACL 2020) 
+				由浅入深地训练深层网络 (Li et al., EMNLP 2020)
+					Depth-wise (Zhang et al., EMNLP 2019)
+					Lipschitz Constrained (Xu et al., ACL 2020) 
+					T-Fixup 2020
+					ADMIN 2020
+	3.2提升模型运行效率
+		训练代价高，推断效率低
+			层级结构剪枝
+				FastBERT (Liu et al., ACL 2020)
+				Depth Adaptive Transformer (Elbayad et al., ICLR 2020) 
+				LayerDrop (Fan et al., ICLR 2020)
+			低秩分解
+				词频越高则词向量维度越大，词频越低则维度越小
+					Adaptive Input Representations (Baevski et al., ICLR 2019)
+				将矩阵分解应用于自注意力计算，层数越高映射矩阵越小
+					Linformer：self-attention with Linear Complexity 2020
+			减少冗余计算
+				Sharing Attention Weights (Xiao et al., IJCAI 2019）
+				ALBERT 2020
+	3.3自动学习模型结构
+		下一步网络结构优化的趋势的预测，网络结构搜索（Neural Architecture Search, NAS）
+		 NAS的整体框架包括三部分
+			一是搜索空间，它决定了搜索哪些模型结构
+				ESS，Li et al., ACL 2020，将循环单元之间的结构引入搜索空间中，在命名实体识别，语言建模任务取得成功
+				Evolving Normalizations, Liu et al., NeurIPS 2020，仅使用基本数学运算为基础进行结构搜索，能搜索到更好的正则化方法
+				Evolved Transformer (So et al., ICML 2019)，以Transformer结构为基础进行搜索，在机器翻译和语言建模任务取得成功
+			二是搜索策略，即如何对搜索空间进行探索
+				DARTS (Liu et al., ICLR 2019) 提出的可微分结构搜索
+				AmoebaNet-a 2019 通过对遗传算法中选择策略改进
+				ProxylessNAS (Cai et al., ICLR 2019) 提出的路径采样和针对硬件资源搜索模型结构
+				NLP模型结构搜索
+					I-DARTS (Jiang et al., EMNLP 2019) 
+					ESS 2020
+					NAS for NMT 2020
+				高效结构搜素
+					HAT (Wang et al., ACL 2020)
+						不同硬件优化Transformer结构
+						GPU-宽而浅的网络结构
+						CPU-深而窄的网络结构
+					AdaBERT 2020
+			三是性能评估，即如何快速对模型结构的性能进行评价。
+
+
+
+
+Convolutional Self-attention

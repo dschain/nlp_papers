@@ -1,0 +1,25 @@
+Bert+CRF的loss函数
+1.Intent
+class_num =1 ，shape(y*)=shape(y)，
+MSELoss
+
+class_num >1 ，shape(y*)=batch,class_num,   shape(y)=batch
+输入CrossEntropyLoss（y*.view(-1,class_num),y.view(-1)）
+CrossEntropyLoss =LogSoftmax + NLLLoss
+2.slot
+Use CRF
+crf=torchcrf((batch,seq,class_num),(batch,seq)
+loss=-crf*ceof
+Not use CRF 
+shape(y*)=batch,seqlen,class_slot_num,   shape(y)=batch,seqlen
+输入CrossEntropyLoss（y*.view(-1,class_slot_num),y.view(-1)）
+CrossEntropyLoss = LogSoftmax + NLLLoss
+
+Seq2Seq-Attention的loss函数
+nn.CrossEntropyLoss
+
+
+模型部署
+
+Flask
+Tensorflow serving，docker部署，gRPC和RESTfull API通讯

@@ -1,0 +1,25 @@
+docker search neo4j
+docker pull neo4j(:版本号)
+docker images
+
+docker run -d --name wsneo4j \  //-d表示容器后台运行 --name指定容器名字
+	-p 7474:7474 -p 7687:7687 \  //映射容器的端口号到宿主机的端口号
+	-v /Users/george/neo4j/data:/data \  //把容器内的数据目录挂载到宿主机的对应目录下
+	-v /Users/george/neo4j/logs:/logs \  //挂载日志目录
+	-v /Users/george/neo4j/conf:/var/lib/neo4j/conf   //挂载配置目录
+	-v /Users/george/neo4j/import:/var/lib/neo4j/import \  //挂载数据导入目录
+	--env NEO4J_AUTH=neo4j/123 \  //设定数据库的名字的访问密码
+	neo4j //指定使用的镜像
+
+neo4j配置
+	vim neo4j.conf
+ 	// 进行以下更改
+	//在文件配置末尾添加这一行
+	dbms.connectors.default_listen_address=0.0.0.0  //指定连接器的默认监听ip为0.0.0.0，即允许任何ip连接到数据库
+
+	//修改
+	dbms.connector.bolt.listen_address=0.0.0.0:7687  //取消注释并把对bolt请求的监听“地址:端口”改为“0.0.0.0:7687”
+	dbms.connector.http.listen_address=0.0.0.0:7474  //取消注释并把对http请求的监听“地址:端口”改为“0.0.0.0:7474”
+docker restart 容器id
+
+数据导入使用Neor4j-import

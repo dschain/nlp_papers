@@ -1,0 +1,54 @@
+二、词向量
+world2vec：CBOW，Skp-gram，huffman，NEG 
+GloVe
+Fasttext
+transformer-xl
+
+openai-gpt
+bert，是一种自编码器autoencoding(AE)模型，正负样本，相邻两句话为正，不相邻为负；过亿参数，耗时比较长
+transformer-xl 参数也多，相对bert快一点
+ELMo，输入1-n，输出2-n+1
+
+
+XLNet
+
+
+Youtube推荐算法
+MMoE
+
+深度信念网络(Deep Belief Network)
+深度兴趣网络(Deep Interest  Network)
+
+样本不平衡
+图片：
+	copy+随机抽取
+	focal loss
+	tg.nn.weighted_cross_entropy_with_logits
+文本：
+	copy，打乱
+	focal loss 效果不好
+	
+样本标注不够，怎么解决？监督学习变半监督学习
+	
+训练时间
+3天,几十万条，2080*2+
+
+三、文本分类
+
+
+项目经验
+	机器翻译MT
+	BLEU 
+	seq2seq-attention，transformer，
+	
+TF-IDF
+归一化：
+BN：batch方向做归一化，算NHW的均值，对小batchsize效果不好；BN主要缺点是对batchsize的大小比较敏感，由于每次计算均值和方差是在一个batch上，所以如果batchsize太小，则计算的均值、方差不足以代表整个数据分布
+LN：channel方向做归一化，算CHW的均值，主要对RNN作用明显；
+IN：一个channel内做归一化，算H*W的均值，用在风格化迁移
+GN：将channel方向分group，然后每个group内做归一化，算(C//G)HW的均值；这样与batchsize无关，不受其约束。
+SwitchableNorm是将BN、LN、IN结合，赋予权重，让网络自己去学习归一化层应该使用什么方法。
+
+
+	
+	
